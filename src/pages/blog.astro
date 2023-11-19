@@ -1,0 +1,284 @@
+---
+import { Icon } from "astro-icon";
+
+import Layout from "@layouts/Layout.astro";
+//data here dont delete because if load more is not clicked then these are shown
+const suggestionsData = [
+{
+      "title": "Islamic Companion",
+      "image": "/image.png",
+      "brief": "Islamic Companion is a comprehensive Islamic application that helps Muslims fulfill their religious duties and stay connected with their faith. This app is dedicated to providing a seamless and ad-free experience while safeguarding your privacy.",
+      "link": "https://salam.app"
+    },
+    {
+      "title": "Faithful Guide",
+      "image": "/image.png",
+      "brief": "Experience the power of Faithful Guide, your trusted companion for all things Islamic. With a commitment to ad-free and privacy-focused features, we ensure that Muslims can navigate their daily routines with ease and devotion.",
+      "link": "https://salam.app"
+    },
+    {
+      "title": "Islamic Devotion",
+      "image": "/image.png",
+      "brief": "Embrace the world of Islamic Devotion, the ultimate Islamic app. We prioritize your privacy and offer a wide range of features to support your spiritual journey without any distractions from advertisements.",
+      "link": "https://salam.app"
+    },
+    {
+      "title": "Prayer Guide",
+      "image": "/image.png",
+      "brief": "Discover the Prayer Guide, your ad-free and privacy-focused Islamic app. It caters to all the needs of a Muslim throughout the day, helping you stay connected to your faith without any compromises.",
+      "link": "https://salam.app"
+    }
+
+  // Add more suggestions here if needed.
+];
+---
+
+<Layout title="Salam App Blog">
+  <head>
+    <title>Salam App: Salah, Quran & more</title>
+    <meta
+      name="description"
+      content="Salam App is an advertisement-free and privacy-focused Islamic app that offers all the features a Muslim needs without compromises, for free! "
+    />
+    <!-- Normal Meta Tags -->
+    <meta property="og:url" content="https://salam.app/help" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Salam App Blog" />
+    <meta
+      property="og:description"
+      content="Salam App is an advertisement-free and privacy-focused Islamic app that offers all the features a Muslim needs without compromises, for free! "
+    />
+    <meta property="og:image" content="https://salam.app/image.png" />
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="salam.app" />
+    <meta property="twitter:url" content="https://salam.app/blog" />
+    <meta name="twitter:title" content="Salam App Blog" />
+    <meta
+      name="twitter:description"
+      content="Salam App is an advertisement-free and privacy-focused Islamic app that offers all the features a Muslim needs without compromises, for free! "
+    />
+    <meta name="twitter:image" content="https://salam.app/image.png" />
+  </head>
+  <!-- js and css part 1 -->
+
+  <script is:inline>
+const suggestionsData = [];
+
+// Function to fetch JSON data and populate suggestionsData.
+function fetchDataAndPopulateSuggestions() {
+  fetch("/searchData.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const dataArray = Array.isArray(data) ? data : Object.values(data);
+      suggestionsData.push(...dataArray);
+    })
+    .catch((error) => {
+      console.error("Error loading data:", error);
+    });
+}
+
+// Call the function to fetch and populate the suggestionsData array.
+fetchDataAndPopulateSuggestions();
+
+// Function to handle input changes and display suggestions.
+function handleInput() {
+  const input = document.querySelector("input");
+  const inputValue = input.value.toLowerCase();
+  const suggestionList = document.querySelector("#suggestion-list-container");
+
+  // Clear previous suggestions.
+  suggestionList.innerHTML = "";
+
+  if (inputValue.trim() === "") {
+    // If the input is empty or only whitespace, hide the suggestion list and return.
+    suggestionList.classList.add("hidden");
+    return;
+  }
+
+  // Filter and display up to 5 suggestions that match the input value or brief text.
+  const matchingSuggestions = suggestionsData.filter((suggestion) => {
+    return (
+      suggestion.title.toLowerCase().includes(inputValue) ||
+      suggestion.brief.toLowerCase().includes(inputValue)
+    );
+  }).slice(0, 5); // Get up to 5 matching suggestions.
+
+  if (matchingSuggestions.length === 0) {
+    // If no suggestions match the input, hide the suggestion list.
+    suggestionList.classList.add("hidden");
+    return;
+  }
+
+  matchingSuggestions.forEach((suggestion) => {
+    const suggestionItem = document.createElement("div");
+    suggestionItem.innerHTML = `
+      <a href="${suggestion.link}" class="block text-white focus:bg-smoke-500 focus:outline-none focus:rounded-lg	"  >
+        <div class="hover:rounded-lg hover:bg-smoke-500  transition-all duration-300">
+          <p class="p-4 text-white text-xl font-bold tracking-tight">${suggestion.title}</p>
+          <p class="p-4 text-base text-gray-400">${suggestion.brief}</p>
+        </div>
+      </a>
+    `;
+
+    suggestionList.appendChild(suggestionItem);
+  });
+
+  // Show the suggestion list.
+  suggestionList.classList.remove("hidden");
+}
+
+
+  </script>
+  <!-- js and css part 1 closes -->
+  <section id="section" class="text-white body-font sm:px-10">
+    <div class="overflow-hidden ">
+      <h1
+        class="text-2xl sm:text-5xl font-bold text-center m-10 whitespace-pre"
+        id="texteffect"
+      >
+      </h1>
+
+      <div class="flex justify-center relative">
+        <input
+          placeholder="eg : Who is Allah?"
+          class="px-5 w-5/6 sm:w-2/4 p-2 rounded-lg text-2xl text-gray-200 bg-grey-500 border border-aquamarine-600 absolute"
+          type="text"
+          oninput="handleInput()"
+        />
+
+        <div
+          id="suggestion-list-container"
+          class="hidden absolute z-10 top-25 mt-20 w-5/6 sm:w-2/4 rounded-lg text-2xl text-gray-200 border bg-smoke-400 border-aquamarine-600"
+        >
+        </div>
+        <!-- auto complete and input tag above   -->
+        <!-- cards here  -->
+        <div id="cards" class="flex flex-wrap justify-center mt-20">
+          <!-- Loop through the suggestionsData array and create a card for each suggestion -->
+          {
+            suggestionsData.map((suggestion) => (
+              <div class="max-w-sm  border-gray-200 rounded-lg  hover:shadow dark:bg-gray-800 hover:bg-smoke-500 m-4 transform translate-y-0 hover:-translate-y-5 transition-transform duration-300 ">
+                <a href={suggestion.link}>
+                  <img
+                    class="rounded-t-lg"
+                    src={suggestion.image}
+                    alt={suggestion.title}
+                  />
+                  <div class="p-5">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      {suggestion.title}
+                    </h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                      {suggestion.brief}
+                    </p>
+                    <p class="inline-flex items-center  py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                      Read more
+                      <Icon
+                        name="ph:link-bold"
+                        alt="link"
+                        class="w-6 h-6 ml-2"
+                      />
+                    </p>
+                  </div>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <button
+          id="load-more-button"
+          class="px-5 py-2 mt-5 bg-aquamarine-600 text-black rounded-lg hover:bg-aquamarine-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+        >
+          Load More
+        </button>
+      </div>
+    </div>
+  </section>
+  <!-- This is for text effect -->
+  <script is:inline>
+  // Text stuff
+  var i = 0;
+  var txt = "Search For Articles.";
+  var speed = 50;
+
+  function typeWriter() {
+    if (i < txt.length) {
+      let x = document.getElementById("texteffect");
+      x.innerText += txt.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+  typeWriter();
+  //this is load more
+  function loadData() {
+  fetch("/data.json")
+    .then((response) => response.json())
+    .then((data) => {
+      var dataArray = Array.isArray(data) ? data : Object.values(data);
+      console.log(dataArray.length);
+      var cards = document.getElementById("cards");
+
+      dataArray.forEach((element) => {
+        var cardDiv = document.createElement("div");
+        cardDiv.className = "max-w-sm border-gray-200 rounded-lg hover:shadow dark:bg-gray-800 hover:bg-smoke-500 m-4 transform translate-y-0 hover:-translate-y-5 transition-transform duration-300";
+
+        var link = document.createElement("a");
+        link.href = element.link;
+
+        var image = document.createElement("img");
+        image.className = "rounded-t-lg";
+        image.src = element.image;
+        image.alt = element.title;
+
+        var cardContent = document.createElement("div");
+        cardContent.className = "p-5";
+
+        var title = document.createElement("h5");
+        title.className = "mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white";
+        title.textContent = element.title;
+
+        var brief = document.createElement("p");
+        brief.className = "mb-3 font-normal text-gray-700 dark:text-gray-400";
+        brief.textContent = element.brief;
+
+        var readMoreButton = document.createElement("p");
+        readMoreButton.className = "inline-flex items-center py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
+        readMoreButton.textContent = "Read more";
+
+        var linkIcon = document.createElement("Icon");
+        linkIcon.setAttribute("name", "ph:link-bold");
+        linkIcon.setAttribute("alt", "link");
+        linkIcon.className = "w-6 h-6 ml-2";
+
+        readMoreButton.appendChild(linkIcon);
+        cardContent.appendChild(title);
+        cardContent.appendChild(brief);
+        cardContent.appendChild(readMoreButton);
+        link.appendChild(image);
+        link.appendChild(cardContent);
+        cardDiv.appendChild(link);
+        cards.appendChild(cardDiv);
+      });
+    })
+    .catch((error) => {
+      console.error("Error loading data:", error);
+    });
+}
+document.getElementById("load-more-button").addEventListener("click", loadData);
+
+const suggestionList = document.getElementById("suggestion-list-container");
+
+
+// Hide suggestion list container on click outside
+document.addEventListener("click", (event) => {
+  const isClickInside = suggestionList.contains(event.target) 
+  if (!isClickInside) {
+    suggestionList.classList.add("hidden");
+  }
+});
+  </script>
+</Layout>
