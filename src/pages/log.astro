@@ -1,0 +1,87 @@
+---
+import { Icon } from "astro-icon";
+
+import Layout from "@layouts/Layout.astro";
+//data here is the data from the json file
+
+const data = [
+{
+    version : "1.2.3",
+    date : "Sep 11, 2023",
+    heading: "Introducing Salam App 1.2.3!",
+    brief: "Addressing the bug where the Home screen widget prayer times did not match the app times for certain regions (e.g., France). We also fixed the issue where the widgets did not reflect angle settings."
+  },
+  {
+    version : "1.2.2",
+    date : "Aug 2, 2023",
+    heading: "Introducing Salam App 1.2.2!",
+    brief: "This update tends to focus on fixes and minor improvements to enhance overall app performance."
+  },
+  {
+    version : "1.2.1",
+    date : "Jun 27, 2023",
+    heading: "HOTFIX : Salam App 1.2.0!",
+    brief: "Enhances prayer auto-detection for more accurate times and includes various fixes and improvements."
+  },
+    {
+    version : "1.2.0",
+    date : "Jun 15, 2023",
+    heading: "Introducing Salam App 1.2.0!",
+    brief: "This update enhances prayer auto-detection for more accurate times and includes various fixes and improvements."
+  },
+    {
+    version : "1.1.5!",
+    date : "Mar 24, 2023",
+    heading: "Ramadan Mubarak! Salam App 1.1.5! is here!",
+    brief: "Adding a variety of reminders to help you stay consistent with your ibadah. Some bugs were also fixed."
+  },
+
+    {
+    version : "1.1.0",
+    date : "Jan 20, 2023",
+    heading: "Introducing the Salam App 1.1.0!",
+    brief: "Based on user feedback, we have added many new features such as Dhikr & Dua, Quran Player, and Islamic Calendar. We have also improved existing features and the user interface, as well as added a brand new theme, the Ayyubid Sultanate."
+  },
+  {
+    version : "1.0.1",
+    date : "Sep 3, 2022",
+    heading: "Introducing the Salam App 1.0.1",
+    brief: "Bug fixes and improvements. Prayer settings auto-detection has been fixed for users in the UK/Hong Kong/and other regions. Check out the Rashidun Caliphate theme!"
+  },
+  {
+    version : "1.0",
+    date : "Aug 14, 2022",
+    heading: "Salam App v1 realesed on both playstore and appstore",
+    brief: ""
+  },
+  
+  ]
+---
+
+<Layout title="Salam App Changelog">
+  <div class="pt-10">
+  {data.map(item => (
+    <div class="flex justify-center p-2 mt-8 sm:mt-0 sm:p-5">
+      <a
+        href="#"
+        class="flex flex-col items-center rounded-lg shadow md:flex-row w-11/12 lg:w-2/3 border-gray-800 bg-gray-900 hover:bg-gray-700"
+      >
+        <div class="flex flex-col justify-between p-4 leading-normal">
+          <h1
+            class="mb-2 text-4xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            {item.heading}
+          </h1>
+          <div class="flex">
+            <p class="mb-3 font-normaln  text-gray-200">Date : {item.date}</p>
+            <Icon name="fontisto:date" alt="" class="w-5 h-5 ml-2  fill-current text-grey-50" />
+          </div>
+          <p class="mb-3 font-normal text-lg text-gray-400">
+            {item.brief}
+          </p>
+        </div>
+      </a>
+    </div>
+  ))}
+  </div>
+</Layout>

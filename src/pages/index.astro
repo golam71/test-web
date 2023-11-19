@@ -1,0 +1,22 @@
+---
+import Features from "@components/Features.astro";
+import Hero from "@components/Hero.astro";
+import Stats from "@components/Stats.astro";
+import Layout from "@layouts/Layout.astro";
+import WordBubble from "src/components/WordBubble.astro";
+import { Testimonials } from "src/solid/Testimonials";
+---
+
+<Layout title="Salam App">
+  <Hero />
+  <WordBubble />
+  <Features />
+  <Stats />
+  <Testimonials client:idle />
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>

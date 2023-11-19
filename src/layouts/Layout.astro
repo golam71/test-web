@@ -1,0 +1,59 @@
+---
+import Footer from "@components/Footer.astro";
+import { NavBar } from "../solid/Navbar.jsx";
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />   
+     <meta content="width=device-width" name="viewport" />   
+     <meta content={Astro.generator} name="generator" />
+    <!-- <link rel="icon" href="/favicon.ico" /> -->
+    <link href="/favicon.ico" rel="icon" type="image/svg+xml" />
+    <!-- <link href="/favicon.png" rel="icon" type="image/svg+xml" /> -->
+ 
+    <title>{title}</title>
+
+    <!-- HTML Meta Tags -->
+    <title>Salam App: Salah, Quran & more</title>
+    <meta
+      name="description"
+      content="Salam App is an advertisement-free and privacy-focused Islamic app that offers all the features a Muslim needs without compromises, for free! "
+    />
+
+    <!-- Normal Meta Tags -->
+    <meta property="og:url" content="https://salam.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Salam App: Salah, Quran & more" />
+    <meta
+      property="og:description"
+      content="Salam App is an advertisement-free and privacy-focused Islamic app that offers all the features a Muslim needs without compromises, for free! "
+    />
+    <meta property="og:image" content="https://salam.app/image.png" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="salam.app" />
+    <meta property="twitter:url" content="https://salam.app" />
+    <meta name="twitter:title" content="Salam App: Salah, Quran & more" />
+    <meta
+      name="twitter:description"
+      content="Salam App is an advertisement-free and privacy-focused Islamic app that offers all the features a Muslim needs without compromises, for free! "
+    />
+    <meta name="twitter:image" content="https://salam.app/image.png" />
+    <!-- HTML Meta Tags -->
+  </head>
+  <body class="bg-smoke-400">
+    <NavBar client:load />
+
+    <slot />
+    <Footer />
+  </body>
+</html>

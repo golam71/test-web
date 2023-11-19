@@ -1,0 +1,449 @@
+---
+import Layout from "@layouts/Layout.astro";
+import CiDiscord from "~icons/ci/discord";
+import CiGithub from "~icons/ci/github";
+import CiWebsite from "~icons/mdi/world-wide-web";
+import CiMail from "~icons/ic/round-mail-outline";
+
+const developers = [
+  {
+    name: "Saad",
+    position: "Head App Developer",
+    image: "saad.png",
+
+    flags: [
+      {
+        src: "pakistan.svg",
+
+        alt: "Pakistan flag",
+      },
+      {
+        src: "canada.svg",
+
+        alt: "Canada flag",
+      },
+    ],
+
+    bio: "Computer Science graduate trying to serve the Ummah with his knowledge and skills. Also loves RuneScape (Oldschool).",
+
+    links: [
+      {
+        github: "https://github.com/saad197",
+      },
+      {
+        discord: "https://discord.com/users/692505234571788359",
+      },
+    ],
+  },
+  {
+    name: "Ismail Fateen",
+    position: "App Developer",
+    image: "ismail.png",
+
+    flags: [
+      {
+        src: "egypt.svg",
+        alt: "egypt flag",
+      },
+    ],
+
+    bio: "I'm 15 years old―new to the programming world and always learning! ",
+
+    links: [
+      
+      {
+        github: "https://github.com/ismailfateen",
+      },
+      {
+        discord: "https://discord.com/users/695148745184116736",
+      },
+    ],
+  },
+  {
+    name: "Razer ",
+    position: "App Developer",
+    image: "razer.png",
+
+    flags: [
+      {
+        src: "pakistan.svg",
+        alt: "pakistan flag",
+      },
+    ],
+
+    bio: "Purger of artifice, Weaver of code, Seeker of the Path, Possessor of ornaments.",
+
+    links: [
+      {
+        github: "https://github.com/deadlyrazer",
+      },
+      {
+        discord: "https://discord.com/users/362484698292813825",
+      },
+    ],
+  },
+  {
+    name: "Edster",
+    position: "App Developer, UI Developer",
+    image: "edster.png",
+
+    flags: [
+      {
+        src: "turkey.svg",
+        alt: "turkey flag",
+      },
+      {
+        src: "netherlands.svg",
+        alt: "netherlands flag",
+      },
+    ],
+
+    bio: "UI and GFX artist for Salam App.",
+
+    links: [
+      {
+        discord: "https://discord.com/users/154946343662518273",
+      },
+    ],
+  },
+  {
+    name: "Sauood al-Mashreqi",
+    position: "App Developer",
+    image: "saud.png",
+
+    flags: [
+      {
+        src: "kashmir.svg",
+        alt: "kashmir flag",
+      },
+    ],
+
+    bio: "Student of Knowledge in the fields of Cyber Security & Theology, and a Khulafa Rashideen fan.",
+
+    links: [
+      {
+        website: "https://almashreqi.tech/",
+      },
+      {
+        github: "https://github.com/AlMashreqi",
+      },
+      {
+        discord: "https://discord.com/users/777202501283610624",
+      },
+    ],
+  },
+  {
+    name: "Muntasir Enam ",
+    position: "App Developer",
+    image: "muntasir.png",
+
+    flags: [
+      {
+        src: "saudi.svg",
+        alt: "saudi flag",
+      },
+      {
+        src: "bangladesh.svg",
+        alt: "bangladesh flag",
+      },
+    ],
+
+    bio: "Developer, Gamer, Moderator at MGL and junior dev at Salamlabs. ",
+
+    links: [
+      {
+        website: "https://noobdev54.com/",
+      },
+      {
+        github: "https://github.com/Muntasir2001",
+      },
+      {
+        discord: "https://discord.com/users/374230181889572876",
+      },
+    ],
+  },
+  {
+    name: "Trident",
+    position: "App Developer",
+    image: "trident.png",
+
+    flags: [
+      {
+        src: "pakistan.svg",
+        alt: "pakistan flag",
+      },
+    ],
+
+    bio: "I contributed to the app's development.",
+
+    links: [
+      {
+        github: "https://github.com/Tr1d3nt",
+      },
+      {
+        discord: "https://discord.com/users/1066411541664108596",
+      },
+    ],
+  },
+  {
+    name: "BalkoBalko",
+    position: "App Developer, Backend Developer",
+    image: "balkobalko.png",
+
+    flags: [
+      {
+        src: "pakistan.svg",
+        alt: "pakistan flag",
+      },
+    ],
+
+    bio: "I love working on cool things. I slightly contributed to the app.",
+
+    links: [
+      {
+        github: "https://github.com/BalkoBalkho",
+      },
+      {
+        discord: "https://discord.com/users/475999932264874014",
+      },
+    ],
+  },
+  {
+    name: "Ajmain",
+    position: "Content Writer",
+    image: "ajmain.png",
+
+    flags: [
+      {
+        src: "bangladesh.svg",
+        alt: "bangladesh flag",
+      },
+    ],
+
+    bio: "History text writer for Salam App Themes, Salam App tester.",
+
+    links: [
+      {
+        discord: "https://discord.com/users/838762527700549642",
+      },
+    ],
+  },
+  {
+    name: "Nok",
+    position: "Content Writer",
+    image: "nok.png",
+
+    flags: [
+      {
+        src: "egypt.svg",
+        alt: "egypt flag",
+      },
+      {
+        src: "canada.svg",
+        alt: "canada flag",
+      },
+    ],
+
+    bio: "Person of lesser than average importance who, on occasion, may perform some tasks.",
+
+    links: [
+      {
+        discord: "https://discord.com/users/261321536701595648",
+      },
+    ],
+  },
+  {
+    name: "Spark",
+    position: "Web Developer",
+    image: "spark.png",
+
+    flags: [
+      {
+        src: "blue.svg",
+        alt: "flag",
+      },
+    ],
+
+    bio: "A backend developer interested in things.",
+
+    links: [
+      {
+        mail: "mailto:sparklytical@protonmail.com",
+      },
+    ],
+  },
+  {
+    name: "Golam",
+    position: "Web Developer",
+    image: "golam.png",
+
+    flags: [
+      {
+        src: "bangladesh.svg",
+        alt: "bangladesh flag",
+      },
+    ],
+
+    bio: "I write code and want to make opensource islamic software.",
+
+    links: [
+      {
+        github: "https://github.com/golam71/",
+      },
+      {
+        discord: "https://discord.com/users/753155767615356929",
+      },
+    ],
+  },
+];
+---
+
+<Layout title="Salam App Team">
+  <section class="text-white body-font sm:px-10">
+    <div class="flex justify-center">
+      <div class="my-2 flex justify-around space-x-2 p-2 w-full sm:w-4/6">
+        <button
+          id="All"
+          class="p-1 hover:text-aquamarine font-semibold underline-offset-4"
+          onclick="showDevelopers('All')"
+                    >ALL
+        </button>
+        <div>/</div>
+        <button
+          id="App"
+          class="p-1 hover:text-aquamarine font-semibold underline-offset-4"
+          onclick="showDevelopers('App')"
+                    >APP
+        </button>
+        <div>/</div>
+        <button
+          id="Web"
+          class="p-1 hover:text-aquamarine font-semibold underline-offset-4"
+          onclick="showDevelopers('Web')"
+                    >WEB
+        </button>
+        <div>/</div>
+        <button
+          id="UI"
+          class="p-1 hover:text-aquamarine font-semibold underline-offset-4"
+          onclick="showDevelopers('UI')"
+                    >DESIGN
+        </button>
+        <div>/</div>
+        <button
+          id="Writer"
+          class="p-1 hover:text-aquamarine font-semibold underline-offset-4"
+          onclick="showDevelopers('Writer')"
+                    >TEXT
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap justify-center m-4 p-5">
+      {
+        developers.map((developer) => (
+          <div
+            position={developer.position}
+            id="developer-card"
+            class="p-4 lg:w-1/4 md:w-1/2"
+            aria-label={developer.name}
+          >
+            <div class="h-full flex flex-col items-center text-center">
+              <img
+                src={developer.image}
+                class="mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56"
+                alt={`${developer.name}'s profile picture`}
+              />
+              <div class="w-full mt-10">
+                <h2 class="title-font font-medium text-lg text-white">
+                  {developer.name}
+                </h2>
+
+                <div
+                  class={`flex w-${
+                    developer.flags.length === 2
+                      ? "[70px] flex justify-center"
+                      : "[35px]"
+                  } mx-auto `}
+                  aria-label="Developer's flags"
+                >
+                  {developer.flags.map((flag) => (
+                    <img
+                      src={flag.src}
+                      class="h-[25px] w-[35px] mx-1 m-2"
+                      alt={flag.alt}
+                    />
+                  ))}
+                </div>
+
+                <h3 class="text-gray-400 mb-3">{developer.position}</h3>
+                <p class="mb-4">{developer.bio}</p>
+                <span class="inline-flex">
+                  {developer.links.map((link) => (
+                    <a
+                      key={Object.values(link)[0]}
+                      class="text-white p-3"
+                      target="_blank"
+                      href={Object.values(link)[0]}
+                      aria-label={`Link to ${Object.keys(link)[0]}`}
+                    >
+                      {Object.keys(link)[0] === "github" ? (
+                        <CiGithub alt="GitHub logo" class="w-6 h-6" />
+                      ) : Object.keys(link)[0] === "discord" ? (
+                        <CiDiscord alt="Discord logo" class="w-6 h-6" />
+                      ) : Object.keys(link)[0] === "website" ? (
+                        <CiWebsite alt="Website logo" class="w-6 h-6" />
+                      ) : Object.keys(link)[0] === "mail" ? (
+                        <CiMail alt="Website logo" class="w-6 h-6" />
+                      ) : null}
+                    </a>
+                  ))}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+      /* overflow-x: hidden; */
+    }
+  </style>
+
+  <script is:inline>
+    const array = ["All", "App", "Web", "UI", "Writer"];
+
+    function underline(position) {
+      array.forEach((element) => {
+        const selectedElement = document.getElementById(element);
+        selectedElement.classList.remove("underline");
+        selectedElement.classList.remove("text-aquamarine");
+      });
+      const selectedElement = document.getElementById(position);
+      selectedElement.classList.add("underline");
+      selectedElement.classList.add("text-aquamarine");
+    }
+
+    function showDevelopers(position) {
+      underline(position);
+
+      const cards = document.querySelectorAll("#developer-card");
+
+      cards.forEach((card) => {
+        const cardPosition = card.getAttribute("position");
+
+        card.style.display =
+          position === "All" ||
+          (cardPosition && cardPosition.includes(position))
+            ? "block"
+            : "none";
+      });
+    }
+
+    showDevelopers("All");
+  </script>
+</Layout>
