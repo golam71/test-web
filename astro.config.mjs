@@ -24,7 +24,8 @@ export default defineConfig({
     speedInsights: {
       enabled: true,
     },
-    webAnalytics: true,
+    webAnalytics: {
+      enabled: true,
+    },
   }),
 });
-
