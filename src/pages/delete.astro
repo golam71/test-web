@@ -1,0 +1,103 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon";
+---
+
+<Layout title="Salam App Data Deleteion Page">
+  <div class="p-10 sm:px-36" id="main">
+    <h1 class="text-center text-5xl text-aquamarine font-bold mb-16">
+      Account Settings
+    </h1>
+    <p class="mb-10 text-lg text-white">
+      User data is only stored if the backup/sync feature is enabled; if you
+      wish for all user data to be deleted, enter the e-mail linked to your
+      account in the field below.
+    </p>
+    <b class="text-white mt-20">This can not be undone</b>
+    <label
+      for="helper-text"
+      class="block mt-10 text-sm font-medium dark:text-white">Your email</label
+    >
+    <div class="flex mt-1">
+      <input
+        type="email"
+        id="email"
+        aria-describedby="helper-text-explanation"
+        class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 text-white"
+        placeholder="example@gmail.com"
+      />
+
+      <button
+        class="bg-aquamarine-500 rounded-md px-4 mx-5"
+        id="button"
+        onclick="remove()"
+      >
+        <Icon name="ph:trash-bold" alt="delete icom" class="w-5 h-5" />
+      </button>
+    </div>
+
+    <div class="flex">
+      <p class="mt-2 text-sm text-gray-400">
+        We’ll never share your details. Read our
+      </p>
+      <a
+        href="/policy"
+        class="text-aquamarine-500 mt-2 ml-1 hover:underline text-sm"
+      >
+        Policy</a
+      >
+    </div>
+  </div>
+
+  <script is:inline>
+    function remove() {
+      var email = document.getElementById("email").value;
+      var xhr = new XMLHttpRequest();
+      xhr.open(
+        "POST",
+        "https://salam-app-backend.onrender.com/delete",
+        true,
+      );
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          console.log(xhr.responseText);
+        }
+      };
+      xhr.send("email=" + email); // Change 'name' to 'email'
+
+      //
+      document.getElementById("main").innerHTML = "";
+      document.getElementById("main").innerHTML =
+        '<h1 class="text-center text-5xl text-aquamarine font-bold mb-16">Please check your mail</h1>' +
+        '<p class="mb-10 text-lg text-center text-white">A confirmation link has been sent to your e-mail. Please click  the link to confirm your data deletion request.</p>' +
+        '<h1 class="text-center text-aquamarine font-bold mb-16">Check spam folder too</h1>';
+    }
+    // Get the current URL
+    var currentUrl = window.location.href;
+
+    // Check if the URL contains '#success'
+    if (currentUrl.includes("#success")) {
+      document.getElementById("main").innerHTML = "";
+      document.getElementById("main").innerHTML =
+        '<h1 class="text-center text-5xl text-aquamarine font-bold mb-16">SUCCESS</h1>' +
+        '<p class="text-center mb-10 text-lg text-white">Your data deletion request has been submitted; all your user data will be removed within the next few days. You can re-enable the sync feature by logging into Salam App, but old data will be irretrievable.</p>' +
+        '<h1 class="text-center text-aquamarine font-bold mb-16">You may close this window</h1> ';
+    }
+    //button enter keyboard
+    document
+      .getElementById("email")
+      .addEventListener("keyup", function (event) {
+        event.preventDefault();
+        if (event.key === "Enter") {
+          document.getElementById("button").click();
+        }
+      });
+  </script>
+</Layout>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
