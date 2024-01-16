@@ -5,26 +5,28 @@ import compress from "astro-compress";
 import { defineConfig } from "astro/config";
 import Icons from "unplugin-icons/vite";
 import vercel from "@astrojs/vercel/serverless"; // Updated import
+import mdx from "@astrojs/mdx";
 
+// https://astro.build/config
 export default defineConfig({
   site: "https://salam.app",
-  integrations: [tailwind(), sitemap(), solidJs(), compress()],
+  integrations: [tailwind(), sitemap(), solidJs(), compress(), mdx()],
   vite: {
     ssr: {
-      noExternal: ["solid-dismiss"],
+      noExternal: ["solid-dismiss"]
     },
-    plugins: [
-      Icons({
-        compiler: "astro",
-      }),
-    ],
+    plugins: [Icons({
+      compiler: "astro"
+    })]
   },
-  output: 'server', // Adjusted output
+  output: 'server',
+  // Adjusted output
   adapter: vercel({
     speedInsights: {
-      enabled: true,
+      enabled: true
     },
-    webAnalytics: true,
-  }),
+    webAnalytics: {
+      enabled: true
+    }
+  })
 });
-
