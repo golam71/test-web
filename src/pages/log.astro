@@ -1,6 +1,5 @@
 ---
-import { Icon } from "astro-icon";
-
+import CiDate from "~icons/fontisto/date"
 import Layout from "@layouts/Layout.astro";
 //data here is the data from the json file
 
@@ -74,7 +73,7 @@ const data = [
           </h1>
           <div class="flex">
             <p class="mb-3 font-normaln  text-gray-200">Date : {item.date}</p>
-            <Icon name="fontisto:date" alt="" class="w-5 h-5 ml-2  fill-current text-grey-50" />
+            <CiDate class="w-5 h-5 ml-2  fill-current text-grey-50" />
           </div>
           <p class="mb-3 font-normal text-lg text-gray-400">
             {item.brief}
