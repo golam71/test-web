@@ -1,21 +1,29 @@
 ---
-export interface Props {
-  title: string;
-  body: string;
-  href: string;
-}
-
-const { href, title, body } = Astro.props as Props;
+const { title, image, brief, link } = Astro.props;
+import CiLink from "~icons/ph/link-bold";
 ---
 
-<li class="link-card bg-green-600">
-  <a href={href}>
-    <h2>
-      {title}
-      <span>&rarr;</span>
-    </h2>
-    <p>
-      {body}
-    </p>
+<div
+  class="max-w-sm border-gray-200 rounded-lg hover:shadow bg-gray-800 hover:bg-smoke-500 m-4 transform translate-y-0 hover:-translate-y-5 transition-transform duration-300"
+>
+  <a href={link}>
+    <img
+      class="rounded-t-lg h-[216px] w-[383px]"
+      src={image}
+      alt={title}
+      loading="lazy"
+    />
+    <div class="p-5">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
+        {title}
+      </h5>
+      <p class="mb-3 font-normal text-gray-400">{brief}</p>
+      <p
+        class="inline-flex items-center py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+      >
+        Read more
+        <CiLink name="ph:link-bold" class="w-6 h-6 ml-2" />
+      </p>
+    </div>
   </a>
-</li>
+</div>

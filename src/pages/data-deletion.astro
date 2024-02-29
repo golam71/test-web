@@ -10,16 +10,22 @@ import CiTrash from "~icons/ph/trash-bold";
     >
       Data Deletion
     </h1>
-    <p class="mb-10 text-lg text-white">
+    <p class="mb-5 text-lg text-white">
       User data is only stored if Salam App Cloud is used to create a backup; if
-      you wish for all user data to be deleted, enter the e-mail linked to your
-      account in the field below.
+      you wish for all user data to be deleted, Please solve the reCAPTCHA and
+      then enter the e-mail linked to your account in the field below. When you
+      see the trash icon press it.
     </p>
-    <b class="text-white mt-20">This cannot be undone.</b>
+    <b class="text-white">This cannot be undone.</b>
+    <div
+      class="g-recaptcha mt-5"
+      data-sitekey="6Ldm02QpAAAAAL0_vVUB7nesbM4Yn8QT8OxBfa1E"
+      data-callback="onRecaptchaCallback"
+    >
+    </div>
     <label
       for="helper-text"
-      class="block mt-10 text-sm font-medium dark:text-white"
-      >Your email :</label
+      class="block mt-5 text-sm font-medium dark:text-white">Your email :</label
     >
     <div class="flex mt-1">
       <input
@@ -31,12 +37,9 @@ import CiTrash from "~icons/ph/trash-bold";
       />
 
       <button
-        class="bg-grey-200 rounded-md px-4 mx-5"
+        class="bg-aquamarine-500 rounded-md px-4 mx-5 hidden"
         id="button"
         onclick="remove()"
-
-
-
       >
         <CiTrash name="ph:trash-bold" class="w-5 h-5" />
       </button>
@@ -54,21 +57,49 @@ import CiTrash from "~icons/ph/trash-bold";
       </p>
     </div>
   </div>
-
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script is:inline>
-    button.disabled = true;
+    //wake up the server
+var awake = new XMLHttpRequest();
+awake.open('POST', 'https://salam-app-backend.onrender.com/heartbeat', true);
+awake.setRequestHeader('Content-Type', 'text/plain');
+awake.send('awake');
+
+    //server woken 
+
+    let solvedCaptcha = 0;
+    var token;
+    function handleRecaptcha() {
+      grecaptcha.ready(function () {
+        grecaptcha
+          .execute("6Ldm02QpAAAAAL0_vVUB7nesbM4Yn8QT8OxBfa1E")
+          .then(function (responseToken) {
+            console.log("Response Token:", responseToken);
+          }); // i dont know why but this does not show output
+      });
+    }
+    // Callback function to handle reCAPTCHA completion
+    function onRecaptchaCallback(response) {
+      token = response;
+      console.log("User solved reCAPTCHA. Response:", token);
+      solvedCaptcha = 1;
+    }
+
     function remove() {
-      var email = document.getElementById("email").value;
+      var email =document.getElementById("email").value;
+      console.log("email  is")
+      console.log(email)
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://76bac981-a7ce-4568-90be-d942824b834d-00-efjhrap6x2w1.riker.replit.dev/delete", true);
+      xhr.open("POST", "https://salam-app-backend.onrender.com/delete", true);
       xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
           console.log(xhr.responseText);
         }
       };
-      xhr.send("email=" + email); // Change 'name' to 'email'
-
+      console.log(token);
+      // xhr.send("email=" + email);
+      xhr.send("email=" + email + "&token=" + token);
       //
       document.getElementById("main").innerHTML = "";
       document.getElementById("main").innerHTML =
@@ -93,17 +124,10 @@ import CiTrash from "~icons/ph/trash-bold";
       var email = this.value;
       var button = document.getElementById("button");
 
-      // Check if the email contains "@gmail.com"
       if (email.includes("@") && email.includes(".")) {
-        // If it does, enable the button and add the class bg-aquamarine-500
-        button.disabled = false;
-        button.classList.add("bg-aquamarine-500");
-        button.classList.remove("bg-grey-200");
-      } else {
-        // If it does not, disable the button and add the class bg-grey-300
-        button.disabled = true;
-        button.classList.add("bg-grey-200");
-        button.classList.remove("bg-aquamarine-500");
+        if (solvedCaptcha == 1) {
+          document.getElementById("button").classList.remove("hidden");
+        }
       }
     });
   </script>

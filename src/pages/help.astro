@@ -1,0 +1,179 @@
+---
+import Card from "@components/Card.astro";
+import Layout from "@layouts/Layout.astro";
+//data here dont delete because if load more is not clicked then these are shown
+const blogData = [
+  {
+    title: "99 Names Modules",
+    image: "https://articles.salam.app/99_Names/Cover.png",
+    brief:
+      "Introduction to Salam App's 99 names modules and instructions to use it.",
+    link: "/help/99-names",
+  },
+  {
+    title: "Calendar",
+    image: "https://articles.salam.app/99_Names/Cover.png",
+    brief:
+      "Introduction to Salam App's 99 names modules and instructions to use it.",
+    link: "/help/calendar",
+  },
+  // Add more suggestions here if needed.
+];
+---
+
+<Layout title="Salam App Blog">
+  <!-- js and css part 1 -->
+
+  <script is:inline>
+    const blogData = [];
+
+    // Function to fetch JSON data and populate blogData.
+    function fetchDataAndPopulateSuggestions() {
+      fetch("/entries.json")
+        .then((response) => response.json())
+        .then((data) => {
+          const dataArray = Array.isArray(data) ? data : Object.values(data);
+          blogData.push(...dataArray);
+        })
+        .catch((error) => {
+          console.error("Error loading data:", error);
+        });
+    }
+
+    // Call the function to fetch and populate the blogData array.
+    fetchDataAndPopulateSuggestions();
+
+    // Function to handle input changes and display suggestions.
+    function handleInput() {
+      const input = document.querySelector("input");
+      const inputValue = input.value.toLowerCase();
+      const suggestionList = document.querySelector(
+        "#suggestion-list-container",
+      );
+
+      // Clear previous suggestions.
+      suggestionList.innerHTML = "";
+
+      if (inputValue.trim() === "") {
+        // If the input is empty or only whitespace, hide the suggestion list and return.
+        suggestionList.classList.add("hidden");
+        return;
+      }
+
+      // Filter and display up to 5 suggestions that match the input value or brief text.
+      const matchingSuggestions = blogData
+        .filter((suggestion) => {
+          return (
+            suggestion.title.toLowerCase().includes(inputValue) ||
+            suggestion.brief.toLowerCase().includes(inputValue)
+          );
+        })
+        .slice(0, 5); // Get up to 5 matching suggestions.
+
+      if (matchingSuggestions.length === 0) {
+        // If no suggestions match the input, hide the suggestion list.
+        suggestionList.classList.add("hidden");
+        return;
+      }
+
+      matchingSuggestions.forEach((suggestion) => {
+        const suggestionItem = document.createElement("div");
+        suggestionItem.innerHTML = `
+        <a href="${suggestion.link}" class="block text-white focus:bg-smoke-500 focus:outline-none focus:rounded-lg">
+  <div class="hover:rounded-lg flex hover:bg-smoke-500 transition-all duration-300">
+    <div class="hidden sm:block flex justify-center items-center sm:min-w-5/6"> 
+      <img class="p-2 rounded-xl align-middle" src="${suggestion.image}" height="250px" width="500px">
+    </div>
+    <div class="sm:w-full">
+      <p class="p-2 text-white text-xl font-bold tracking-tight sm:min-w-200">${suggestion.title}</p>
+      <p class="p-2 text-base text-gray-400 max-h-20 overflow-hidden sm:min-w-200">${suggestion.brief}</p>
+    </div>
+  </div>
+</a>
+
+
+    `;
+
+        suggestionList.appendChild(suggestionItem);
+      });
+
+      // Show the suggestion list.
+      suggestionList.classList.remove("hidden");
+    }
+  </script>
+  <!-- js and css part 1 closes -->
+  <section id="section" class="text-white body-font sm:px-5">
+    <div class="overflow-hidden">
+      <h1
+        class="text-2xl sm:text-5xl font-bold text-center m-10 whitespace-pre"
+        id="texteffect"
+      >
+      </h1>
+
+      <div class="flex justify-center">
+        <input
+          placeholder="eg : Who is Allah?"
+          class="px-5 w-5/6 sm:w-3/4 p-2 rounded-lg text-2xl text-gray-200 bg-grey-500 border border-aquamarine-600 absolute"
+          type="text"
+          oninput="handleInput()"
+        />
+
+        <div
+          id="suggestion-list-container"
+          class="hidden absolute z-10 top-25 mt-20 w-5/6 max-w-[5/6] sm:w-3/4 rounded-lg text-2xl text-gray-200 border bg-smoke-400 border-aquamarine-600"
+        >
+        </div>
+        <!-- auto complete and input tag above   -->
+        <!-- cards here  -->
+        <div id="cards" class="flex flex-wrap justify-center mt-20">
+          <!-- Loop through the blogData array and create a card for each suggestion -->
+          {
+            blogData.map((data) => (
+              // card here
+              <Card
+                title={data.title}
+                image={data.image}
+                brief={data.brief}
+                link={data.link}
+              />
+            ))
+          }
+        </div>
+      </div>
+      <!-- <div class="flex justify-center">
+        <button
+          id="load-more-button"
+          class="px-5 py-2 mt-5 bg-aquamarine-600 text-black rounded-lg hover:bg-aquamarine-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+        >
+          Load More
+        </button> -->
+    </div>
+  </section>
+</Layout>
+<!-- This is for text effect -->
+<script is:inline>
+  //this is load more
+  // Text stuff
+  var i = 0;
+  var txt = "Search For Articles.";
+  var speed = 50;
+
+  function typeWriter() {
+    if (i < txt.length) {
+      let x = document.getElementById("texteffect");
+      x.innerText += txt.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+  typeWriter();
+  const suggestionList = document.getElementById("suggestion-list-container");
+
+  // Hide suggestion list container on click outside
+  document.addEventListener("click", (event) => {
+    const isClickInside = suggestionList.contains(event.target);
+    if (!isClickInside) {
+      suggestionList.classList.add("hidden");
+    }
+  });
+</script>

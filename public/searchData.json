@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Salam App",
+    "image": "/image.png",
+    "brief": "Salam App is your privacy-focused Islamic companion. This ad-free app is designed to assist Muslims in all aspects of their daily life, so you can fully dedicate yourself to your faith.",
+    "link": "https://salam.app"
+  },
+  {
+    "title": "99 Names Modules",
+    "image": "https://articles.salam.app/99_Names/Cover.png",
+    "brief": "Introduction to Salam App's 99 names modules and instructions to use it.Leard about the names of Allah almihty.",
+    "link": "/help/99-names"
+  },
+  {
+    "title": "Calendar",
+    "image": "https://articles.salam.app/99_Names/Cover.png",
+    "brief": "Introduction to Salam App's calender modules and instructions to use it. Learn more about the important dates in islam and festivals.",
+    "link": "/help/calendar"
+  }
+]

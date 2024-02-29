@@ -16,33 +16,33 @@
     "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.0.4",
-    "@astrojs/vercel": "^6.1.4",
-    "@vercel/analytics": "^1.1.1",
+    "@astrojs/mdx": "^2.1.1",
+    "@astrojs/vercel": "^7.3.3",
+    "@vercel/analytics": "^1.2.2",
     "animejs": "^3.2.2",
-    "astro-icon": "^1.0.2",
+    "astro-icon": "^1.1.0",
     "solid-dismiss": "^1.7.122",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.6"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.0.4",
+    "@astrojs/sitemap": "^3.1.1",
     "@astrojs/solid-js": "^4.0.1",
     "@astrojs/tailwind": "^5.1.0",
-    "@iconify/json": "^2.2.168",
+    "@iconify/json": "^2.2.187",
     "@tailwindcss/typography": "^0.5.10",
     "@types/animejs": "^3.1.12",
-    "@typescript-eslint/parser": "^6.18.1",
-    "astro": "^4.1.2",
-    "astro-compress": "2.2.7",
+    "@typescript-eslint/parser": "^7.0.2",
+    "astro": "^4.4.4",
+    "astro-compress": "2.2.10",
     "dprint": "^0.45.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-astro": "^0.31.0",
-    "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
-    "prettier": "^3.2.0",
-    "prettier-plugin-astro": "^0.12.3",
-    "solid-js": "^1.8.10",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^0.31.4",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-astro": "^0.13.0",
+    "solid-js": "^1.8.15",
     "tailwindcss": "^3.4.1",
-    "unplugin-icons": "^0.18.2"
+    "unplugin-icons": "^0.18.5"
   }
 }
